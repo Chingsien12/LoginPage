@@ -23,24 +23,62 @@
         android:layout_marginBottom="10dp"
         android:text="Registration form"/>
 
-    <EditText
-        android:id="@+id/edName"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Full Name"
-        android:padding="10dp"
-        android:layout_marginBottom="10dp"/>
-    <EditText
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/email"
-        android:hint="Email"
-        android:padding="10dp"
-        android:layout_marginBottom="10dp"
+<!--    <EditText-->
+<!--        android:id="@+id/edName"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Full Name"-->
+<!--        -->
+<!--        android:padding="10dp"-->
+<!--        android:layout_marginBottom="10dp"/>-->
+    <com.google.android.material.textfield.TextInputLayout
 
-        />
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:backgroundTint="@color/white"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:errorEnabled="true"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edName"
+            android:hint="Fullname"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <EditText-->
+<!--        android:gravity="center"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/email"-->
+
+<!--        android:hint="Email"-->
+<!--        android:padding="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+
+<!--        />-->
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/textInputLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:backgroundTint="@color/white"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:errorEnabled="true"
+        app:helperTextEnabled="true"
+
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
+            android:hint="Email"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+<!--    THird linear row-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

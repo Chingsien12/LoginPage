@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.Gravity
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -27,6 +24,7 @@ class Register : AppCompatActivity() {
     private lateinit var work: EditText
     private lateinit var address: EditText
     private lateinit var loginlink:TextView
+    private lateinit var calender:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -46,6 +44,7 @@ class Register : AppCompatActivity() {
             phone = findViewById(R.id.phone)
             work = findViewById(R.id.History)
             address = findViewById(R.id.address)
+            calender=findViewById(R.id.calender)
             var error: String = ""
 
             //regex check
@@ -55,88 +54,91 @@ class Register : AppCompatActivity() {
             //for checking name if it is null
             if (name.text.toString().isEmpty()) {
                 error += "name field must not be empty\n"
-                name.setBackgroundResource(R.drawable.error)
+                name.error=getString(R.string.erronameEmpty)
             } else {
+                name.error=null
                 if (!regexName.matches(input = name.text.toString())) {
                     error += "name field must only contain character and space\n"
-                    name.setBackgroundResource(R.drawable.error)
+                    name.error=getString(R.string.erronamePattern)
                 } else {
-                    name.setBackgroundResource(R.drawable.noerror)
+                    name.error=null
                 }
             }
+
+                //checking email
             if (email.text.toString().isEmpty()) {
                 error += "Email field must not be empty\n"
-                email.setBackgroundResource(R.drawable.error)
+                email.error=getString(R.string.erroemailEmpty)
             } else {
                 if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()) {
                     error += "Email field must contain ****@****.com\n"
-                    email.setBackgroundResource(R.drawable.error)
+                    email.error=getString(R.string.errorEmailPattern)
                 } else {
                     val list = listOf<String>(email.text.toString()).toTypedArray()
                     val rs = db.rawQuery("SELECT * FROM USERS WHERE EMAIL = ?",list)
                     if (rs.moveToNext())
                     {
                         error += "Email has already taken\n"
-                        email.setBackgroundResource(R.drawable.error)
+                        email.error=getString(R.string.errorEmailTaken)
                     }else
-                    email.setBackgroundResource(R.drawable.noerror)
+                    email.error=null
                 }
             }
 
 
 //
-//
+            //checking the password
             if (password.text.toString() == "") {
                 error += "Password must not be empty\n"
-                password.setBackgroundResource(R.drawable.error)
+                password.error=getString(R.string.errorPassEmpty)
             } else {
-                password.setBackgroundResource(R.drawable.noerror)
+                password.error=null
             }
 
             if (Cpassword.text.toString() == "") {
                 error += "Confirm Password must not be empty\n"
-                Cpassword.setBackgroundResource(R.drawable.error)
+                Cpassword.error=getString(R.string.errorCPassEmpty)
             } else {
                 if ((password.text.toString().trim() != Cpassword.text.toString().trim())) {
                     error += "Password and confirm password must be the same\n"
-                    password.setBackgroundResource(R.drawable.error)
+                    Cpassword.error=getString(R.string.errorPassSame)
                 } else {
-                    Cpassword.setBackgroundResource(R.drawable.noerror)
+                    Cpassword.error=null
                 }
             }
 
             //validate the skill and language
             if (skill.text.toString() == "") {
                 error += "Skill field must not be empty\n"
-                skill.setBackgroundResource(R.drawable.error)
+                skill.error=getString(R.string.errorSkillEmpty)
             } else {
-                skill.setBackgroundResource(R.drawable.noerror)
+                skill.error=null
             }
 
             if (language.text.toString() == "") {
                 error += "Language field must not be empty\n"
-                language.setBackgroundResource(R.drawable.error)
+                language.error=getString(R.string.errorLanguageEmpty)
             } else {
-                language.setBackgroundResource(R.drawable.noerror)
+                language.error=null
             }
 
             //DOB
             if (DOB.text.toString() == "") {
                 error += "Date of birth field must not be empty\n"
-                DOB.setBackgroundResource(R.drawable.error)
+                DOB.error=getString(R.string.errorDOB)
             } else {
-                DOB.setBackgroundResource(R.drawable.noerror)
+                DOB.error=null
             }
             if (!regexPhonenumber.matches(input = phone.text.toString())) {
                 error += "Phone number must not be empty and follow this format 01234567890\n"
-                phone.setBackgroundResource(R.drawable.error)
+                phone.error=getString(R.string.errorPhonePattern)
             } else {
-                phone.setBackgroundResource(R.drawable.noerror)
+                phone.error=null
             }
 //address
             if (address.text.toString() == "") {
                 error += "Address field must not be empty\n"
-                address.setBackgroundResource(R.drawable.error)
+                address.error=getString(R.string.errorAddressEmpty)
             } else {
                 address.setBackgroundResource(R.drawable.noerror)
             }
@@ -164,7 +166,7 @@ class Register : AppCompatActivity() {
 
                 reset()
             } else {
-                Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please check the error!", Toast.LENGTH_SHORT).show()
             }
 
         }

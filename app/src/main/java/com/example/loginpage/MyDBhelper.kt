@@ -54,4 +54,36 @@ class MyDBhelper(context: Context):SQLiteOpenHelper(context,"CORE1",null,1) {
         db.close()
         return postArrayList
     }
+
+    fun getSpecificPost(context: Context,id:String?):ArrayList<Post>
+    {
+        val qry="SELECT * from POST WHERE USERID = $id"
+        val db=this.readableDatabase
+        val cursor=db.rawQuery(qry,null)
+        val postArrayList=ArrayList<Post>()
+
+        if(cursor.count==0)
+        {
+            Toast.makeText(context, "No result found!", Toast.LENGTH_SHORT).show()
+        }else
+        {
+            while (cursor.moveToNext())
+            {
+                val eachLineHolder=Post() // object model
+                eachLineHolder.pid=cursor.getInt(0)
+                eachLineHolder.uid=cursor.getInt(1)
+                eachLineHolder.email=cursor.getString(2)
+                eachLineHolder.title=cursor.getString(3)
+                eachLineHolder.description=cursor.getString(4)
+                eachLineHolder.location=cursor.getString(5)
+                eachLineHolder.application=cursor.getString(6)
+                eachLineHolder.contract=cursor.getString(7)
+                eachLineHolder.date=cursor.getString(8)
+                postArrayList.add(eachLineHolder)
+            }
+        }
+        cursor.close()
+        db.close()
+        return postArrayList
+    }
 }

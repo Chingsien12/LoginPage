@@ -27,7 +27,7 @@ class login : AppCompatActivity() {
 
             name = findViewById(R.id.editUsername)
             password = findViewById(R.id.editPassword)
-
+            //password.setBackgroundResource(0)
             //create the array list to check the if the database contail those data or not
             val Userlist =
                 listOf<String>(name.text.toString(), password.text.toString()).toTypedArray()

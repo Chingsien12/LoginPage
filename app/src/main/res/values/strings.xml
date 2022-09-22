@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">LoginPage</string>
+    <string name="erronameEmpty">Please fill the blank</string>
+    <string name="erronamePattern">Please fill the blank with character only</string>
+    <string name="erroemailEmpty">Please fill the blank</string>
+    <string name="errorEmailPattern">Please follow the format xx@xxxx.com</string>
+    <string name="errorEmailTaken">This email is already taken!</string>
+    <string name="errorPassEmpty">Password must not be empty</string>
+    <string name="errorCPassEmpty">Confirm Password must not be empty</string>
+    <string name="errorPassSame">Password and confirm password must be the same</string>
+    <string name="errorDOB">Date of Birth must not be empty</string>
+    <string name="errorSkillEmpty">Skill field must not be empty</string>
+    <string name="errorLanguageEmpty">Language field must not be empty</string>
+    <string name="errorPhoneEmpty">Phone must not be empty</string>
+    <string name="errorPhonePattern">Phone must follow the format 0xxxxxxxxx</string>
+    <string name="errorAddressEmpty">Address must not be empty</string>
+    <string-array name="state">
+        <item>VIC</item>
+        <item>QLD</item>
+        <item>NSW</item>
+        <item>TA</item>
+        <item>NT</item>
+        <item>WA</item>
+        <item>SA</item>
+    </string-array>
+
+    <string-array name="time">
+        <item>Full Time</item>
+        <item>Part Time</item>
+    </string-array>
+    <string-array name="contract">
+        <item>On-Going</item>
+        <item>Fixed Time</item>
+    </string-array>
 </resources>
