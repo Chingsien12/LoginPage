@@ -124,4 +124,27 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_post_fab"
         app:layout_constraintEnd_toStartOf="@+id/view_post_fab"
         app:layout_constraintTop_toTopOf="@+id/view_post_fab" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/restart_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:srcCompat="@drawable/ic_baseline_refresh_24"
+        app:layout_constraintBottom_toTopOf="@+id/view_post_fab"
+        app:layout_constraintEnd_toEndOf="@+id/view_post_fab"
+        app:layout_constraintStart_toStartOf="@+id/view_post_fab" />
+
+    <TextView
+        android:id="@+id/restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Refresh"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/restart_fab"
+        app:layout_constraintEnd_toStartOf="@+id/restart_fab"
+        app:layout_constraintTop_toTopOf="@+id/restart_fab"
+        app:layout_constraintVertical_bias="0.621" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

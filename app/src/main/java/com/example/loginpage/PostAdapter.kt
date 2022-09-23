@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.li_post.view.*
 import kotlinx.android.synthetic.main.li_post.view.Title
 
-class PostAdapter(context: Context, private val Posts: ArrayList<Post>) :
+class PostAdapter(context: Context, private val Posts: ArrayList<Post>,
+//private val listener: OnItemClickListener
+                  ) :
     RecyclerView.Adapter<PostAdapter.ViewHolder>() {
     //inherited form the RecycleView class
-    class ViewHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView)// hold the view of the R.layout.li_post as all textView
+   inner class ViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView)//, View.OnClickListener// hold the view of the R.layout.li_post as all textView
     {
         val pid = itemView.PID
         val title = itemView.Title
@@ -21,8 +23,25 @@ class PostAdapter(context: Context, private val Posts: ArrayList<Post>) :
         val contract = itemView.contract
         val date = itemView.Date
         val email=itemView.email
-    }
+        val phone=itemView.phone
 
+//        init {
+//            itemView.setOnClickListener { this }
+//        }
+//
+//        override fun onClick(p0: View?) {
+//            val position=adapterPosition
+//            if(position!=RecyclerView.NO_POSITION)
+//            {
+//                listener.onItemClick(position)
+//            }
+//        }
+    }
+    //creating the interface
+//interface OnItemClickListener
+//    {
+//        fun onItemClick(position: Int)
+//    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -45,9 +64,10 @@ class PostAdapter(context: Context, private val Posts: ArrayList<Post>) :
         holder.contract.text = post.contract
         holder.date.text = post.date
         holder.email.text=post.email
+        holder.phone.text=post.phone
+        // using inint function
 
     }
-
     override fun getItemCount(): Int {
         return Posts.size
     }

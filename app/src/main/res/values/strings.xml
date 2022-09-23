@@ -13,22 +13,31 @@
     <string name="errorLanguageEmpty">Language field must not be empty</string>
     <string name="errorPhoneEmpty">Phone must not be empty</string>
     <string name="errorPhonePattern">Phone must follow the format 0xxxxxxxxx</string>
-    <string name="errorAddressEmpty">Address must not be empty</string>
+    <string name="errorAddressEmpty">Address must not be empty!</string>
+    <string name="errorTitle">Tittle must not be empty!</string>
+    <string name="errorDesc">Description must not be empty!</string>
+    <string name="errorEmail">email field must not be empty!</string>
+    <string name="errordate">Date must not be empty!</string>
+    <string name="errorStreet">Street must not be empty!</string>
+    <string name="errorPostcode">Post code muse not be empty!</string>
     <string-array name="state">
+        <item>.....</item>
         <item>VIC</item>
         <item>QLD</item>
         <item>NSW</item>
-        <item>TA</item>
+        <item>TAS</item>
         <item>NT</item>
         <item>WA</item>
         <item>SA</item>
     </string-array>
 
     <string-array name="time">
+        <item>.....</item>
         <item>Full Time</item>
         <item>Part Time</item>
     </string-array>
     <string-array name="contract">
+        <item>.....</item>
         <item>On-Going</item>
         <item>Fixed Time</item>
     </string-array>

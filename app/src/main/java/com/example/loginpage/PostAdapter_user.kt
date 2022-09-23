@@ -1,5 +1,6 @@
 package com.example.loginpage
 
+import android.content.ComponentCallbacks
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import kotlinx.android.synthetic.main.li_post_user.view.*
 class PostAdapterUser(context: Context, private val Posts: ArrayList<Post>) :
     RecyclerView.Adapter<PostAdapterUser.ViewHolder>() {
     //inherited form the RecycleView class
+
+    private var onClickItem:((Post)->Unit)?=null//
     class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView)// hold the view of the R.layout.li_post as all textView
     {
@@ -22,7 +25,13 @@ class PostAdapterUser(context: Context, private val Posts: ArrayList<Post>) :
         val contract = itemView.contract
         val date = itemView.Date
         val email=itemView.email
+        val phone=itemView.phone
     }
+
+    fun setOnclickItem(callbacks:(Post)->Unit )
+    {
+        this.onClickItem=callbacks
+    }//
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -46,7 +55,10 @@ class PostAdapterUser(context: Context, private val Posts: ArrayList<Post>) :
         holder.contract.text = post.contract
         holder.date.text = post.date
         holder.email.text=post.email
-
+        holder.phone.text=post.phone
+        holder.itemView.setOnClickListener {//
+            onClickItem?.invoke(post)
+        }
     }
 
     override fun getItemCount(): Int {

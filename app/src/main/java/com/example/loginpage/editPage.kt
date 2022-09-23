@@ -7,9 +7,11 @@ import android.util.Patterns
 import android.view.Gravity
 import android.view.View
 import android.widget.*
-import kotlin.properties.Delegates
+import kotlinx.android.synthetic.main.li_post.*
 
-class AddPost : AppCompatActivity() {
+class editPage : AppCompatActivity() {
+    private var userid: String? = ""
+    private var pid: String? = ""
     private lateinit var title: EditText
     private lateinit var desc: EditText
     private lateinit var email: EditText
@@ -20,36 +22,19 @@ class AddPost : AppCompatActivity() {
     private lateinit var street: EditText
     private lateinit var state: Spinner
     private lateinit var postcode: EditText
-    private lateinit var post: Button
-    private lateinit var reset: Button
+    private lateinit var update: Button
     private lateinit var applicationSpinnerData: String
     private lateinit var contractSpinnerData: String
     private lateinit var stateSpinnerData: String
-    private  var id:String?=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_post)
-        //set up database
-        val helper = MyDBhelper(applicationContext)
-        val db = helper.readableDatabase
-        //set resource get string
-        val stateString = resources.getStringArray(R.array.state)
-        val applicationString = resources.getStringArray(R.array.time)
-        val contractString = resources.getStringArray(R.array.contract)
-        //set up button
-        reset = findViewById(R.id.reset)
-        post = findViewById(R.id.post)
-        //get the intent
-        id=intent.getStringExtra("ID")
-        //Toast.makeText(this@AddPost, id.toString(), Toast.LENGTH_SHORT).show()
-        //set on click listener on reset
+        setContentView(R.layout.activity_edit_page)
 
-        reset.setOnClickListener {
-            reset()
-        }
         //define the regex Phone
         val phonePattern = """^0[0-8]\d{8}${'$'}""".toRegex()
-        //register with their ID
+        //set up the ID
+        update=findViewById(R.id.update)
         title = findViewById(R.id.Title)
         desc = findViewById(R.id.Desc)
         email = findViewById(R.id.email)
@@ -60,12 +45,62 @@ class AddPost : AppCompatActivity() {
         street = findViewById(R.id.Street)
         state = findViewById(R.id.state)
         postcode = findViewById(R.id.postcode)
+        //set up the intent
+        userid = intent.getStringExtra("ID")
+        pid = intent.getStringExtra("PID")
 
+        //set up the database
+        val helper = MyDBhelper(applicationContext)
+        //val db = helper.writableDatabase
+
+
+        val holder: Post = helper.getSpecificPostUpdate(this, pid)
+        //set resource get string
+        val stateString = resources.getStringArray(R.array.state)
+        val applicationString = resources.getStringArray(R.array.time)
+        val contractString = resources.getStringArray(R.array.contract)
+        //APPLICAITON
+        when (holder.application) {
+            "Part Time" -> application.setSelection(2)
+            "Full Time" -> application.setSelection(1)
+        }
+        //CONTRACT
+        when (holder.contract) {
+            "On-Going" -> contract.setSelection(1)
+            "Fixed Time" -> contract.setSelection(2)
+        }
+        //split the string
+        val delim = "."
+        val list = holder.location.split(delim)
+        //Toast.makeText(this, list[1], Toast.LENGTH_SHORT).show()
+        when (list[1]) {
+            "VIC" -> state.setSelection(1)
+            "QLD" -> state.setSelection(2)
+            "NSW" -> state.setSelection(3)
+            "TAS" -> state.setSelection(4)
+            "NT" -> state.setSelection(5)
+            "WA" -> state.setSelection(6)
+            "SA" -> state.setSelection(7)
+        }
+        //Toast.makeText(this, list[0], Toast.LENGTH_SHORT).show()
+        //set the text to the Edit text
+        title.setText(holder.title)
+        desc.setText(holder.description)
+        email.setText(holder.email)
+        cdate.setText(holder.date)
+        phone.setText(holder.phone)
+        postcode.setText(list[2])
+        street.setText(list[0])
+
+
+        //setup the array string
+        val stateStringDate=resources.getStringArray(R.array.state)
+        val applicationStringData=resources.getStringArray(R.array.time)
+        val contractStringData=resources.getStringArray(R.array.contract)
         //set up the spinner data
-
         application.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                applicationSpinnerData = applicationString[p2]
+                applicationSpinnerData = applicationStringData[p2]
                 //Toast.makeText(this@AddPost,applicationSpinnerData , Toast.LENGTH_SHORT).show()
             }
 
@@ -76,7 +111,7 @@ class AddPost : AppCompatActivity() {
         //set up the contract data
         contract.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                contractSpinnerData = contractString[p2]
+                contractSpinnerData = contractStringData[p2]
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -87,7 +122,7 @@ class AddPost : AppCompatActivity() {
         //set up the state data
         state.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                stateSpinnerData = stateString[p2]
+                stateSpinnerData = stateStringDate[p2]
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -96,8 +131,8 @@ class AddPost : AppCompatActivity() {
 
         }
 
-        //set another btton to post the job
-        post.setOnClickListener {
+        //validation
+        update.setOnClickListener {
             //Toast.makeText(this@AddPost,applicationSpinnerData , Toast.LENGTH_SHORT).show()
             //set up point to check the validation
             var allCheck = 0
@@ -241,42 +276,25 @@ class AddPost : AppCompatActivity() {
                 //CONCAT THE street address
                 var conStreet:String=street.text.toString()+"."+stateSpinnerData+"."+postcode.text.toString()
                 //Toast.makeText(this@AddPost, conStreet, Toast.LENGTH_SHORT).show()
-                //insert into the database
-                val values = ContentValues()
-                values.put("USERID", id)
-                values.put("EMAIL",email.text.toString())
-                values.put("TITLE",title.text.toString())
-                values.put("DES",desc.text.toString())
-                values.put("LOCATION",conStreet)
-                values.put("APPLICATION",applicationSpinnerData)
-                values.put("CONTRACT",contractSpinnerData)
-                values.put("DATE",cdate.text.toString())
-                values.put("PHONE",phone.text.toString())
-                db.insert("POST", null, values)
+                //update into the database
+                //Toast.makeText(this, userid, Toast.LENGTH_SHORT).show()
+                var contentValues=ContentValues()
+                    contentValues.put("EMAIL",email.text.toString())
+                    contentValues.put("TITLE",title.text.toString())
+                    contentValues.put("DES",desc.text.toString())
+                    contentValues.put("LOCATION",conStreet)
+                    contentValues.put("APPLICATION",applicationSpinnerData)
+                    contentValues.put("CONTRACT",contractSpinnerData)
+                    contentValues.put("DATE",cdate.text.toString())
+                    contentValues.put("PHONE",phone.text.toString())
+                val db=MyDBhelper(applicationContext).writableDatabase
 
+                db.update("POST",contentValues, "PID="+holder.pid,null)
 
-                reset()
             } else if (error != "") {
                 Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
             }
 
         }
-
-
-    }
-
-
-    private fun reset() {
-        title.setText("")
-        desc.setText("")
-        email.setText("")
-        cdate.setText("")
-        phone.setText("")
-        postcode.setText("")
-        application.setSelection(0)
-        contract.setSelection(0)
-        state.setSelection(0)
-        street.setText("")
-
     }
 }

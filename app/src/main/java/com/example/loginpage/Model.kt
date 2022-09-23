@@ -11,4 +11,5 @@ class Post {
     var date: String = ""
     var uid: Int = 0
     var email:String=""
+    var phone:String=""
 }
