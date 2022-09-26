@@ -119,13 +119,9 @@
         android:padding="10dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
+        android:editable="false"
         android:layout_gravity="center_vertical"/>
-    <ImageView
-        android:id="@+id/calender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_calendar_month_24"
-        android:layout_weight="1"/>
+
 </LinearLayout>
 
 

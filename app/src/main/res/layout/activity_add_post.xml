@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/gradient_background_addpost"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AddPost">
@@ -11,7 +12,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="377dp"
         android:layout_height="63dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:hint="Job title"
         android:layout_marginLeft="10dp"
 
@@ -29,6 +30,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Title"
             app:endIconMode="custom"
+
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -91,7 +94,6 @@
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:hint="Closing Date"
-        app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,10 +102,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.041"
         app:startIconDrawable="@drawable/ic_baseline_calendar_month_24"
+
         android:layout_weight="1.1">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Cdate"
+            android:editable="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -127,6 +131,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone"
+            android:maxLength="10"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -257,6 +262,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:maxLength="4"
                     android:id="@+id/postcode"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -266,21 +272,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        >
         <Button
+            android:backgroundTint="@color/grey"
             android:id="@+id/post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Post"
             android:layout_weight="1"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             />
+
         <Button
+            android:backgroundTint="@color/grey"
             android:id="@+id/reset"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:text="Reset"
             android:layout_weight="1"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginStart="5dp"/>
     </LinearLayout>
+
 </LinearLayout>

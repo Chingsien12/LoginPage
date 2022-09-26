@@ -1,5 +1,6 @@
 package com.example.loginpage
 
+import android.app.DatePickerDialog
 import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,11 @@ import android.util.Patterns
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import com.example.loginpage.databinding.ActivityMainBinding
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 import kotlin.properties.Delegates
 
 class AddPost : AppCompatActivity() {
@@ -25,10 +31,16 @@ class AddPost : AppCompatActivity() {
     private lateinit var applicationSpinnerData: String
     private lateinit var contractSpinnerData: String
     private lateinit var stateSpinnerData: String
-    private  var id:String?=""
+    private lateinit var date: String
+    private lateinit var binding: ActivityMainBinding
+    private var id: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
+        //set up the title
+        supportActionBar?.title = "Add post"
+        supportActionBar?.subtitle =
+            LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
         //set up database
         val helper = MyDBhelper(applicationContext)
         val db = helper.readableDatabase
@@ -40,7 +52,7 @@ class AddPost : AppCompatActivity() {
         reset = findViewById(R.id.reset)
         post = findViewById(R.id.post)
         //get the intent
-        id=intent.getStringExtra("ID")
+        id = intent.getStringExtra("ID")
         //Toast.makeText(this@AddPost, id.toString(), Toast.LENGTH_SHORT).show()
         //set on click listener on reset
 
@@ -60,7 +72,13 @@ class AddPost : AppCompatActivity() {
         street = findViewById(R.id.Street)
         state = findViewById(R.id.state)
         postcode = findViewById(R.id.postcode)
+        //using binding
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
+        cdate.setOnClickListener {
+
+            setDate()
+        }
         //set up the spinner data
 
         application.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -162,8 +180,7 @@ class AddPost : AppCompatActivity() {
             if (stateSpinnerData == ".....") {
                 error += "You must select on of the state!"
             } else {
-                if(postcode.text.toString().isNotEmpty())
-                {
+                if (postcode.text.toString().isNotEmpty()) {
                     when (stateSpinnerData) {
                         "VIC" -> if (postcode.text[0].toString() == "3" || postcode.text[0].toString() == "8") {
 
@@ -172,60 +189,47 @@ class AddPost : AppCompatActivity() {
                             postcode.error = "For VIC must start with 3xxx or 8xxx"
                         }
 
-                        "NSW" -> if(postcode.text[0].toString() == "1" || postcode.text[0].toString() == "2")
-                        {
+                        "NSW" -> if (postcode.text[0].toString() == "1" || postcode.text[0].toString() == "2") {
 
-                        }else
-                        {
+                        } else {
                             allCheck++
                             postcode.error = "For NSW must start with 1xxx or 2xxx"
                         }
 
-                        "QLD" -> if(postcode.text[0].toString() == "4" || postcode.text[0].toString() == "9")
-                        {
+                        "QLD" -> if (postcode.text[0].toString() == "4" || postcode.text[0].toString() == "9") {
 
-                        }else
-                        {
+                        } else {
                             allCheck++
                             postcode.error = "For QLD must start with 4xxx or 9xxx"
                         }
 
-                        "SA"->if(postcode.text[0].toString() == "5")
-                        {
+                        "SA" -> if (postcode.text[0].toString() == "5") {
 
-                        }else
-                        {
+                        } else {
                             allCheck++
                             postcode.error = "For SA must start with 5xxx"
                         }
-                        "WA" ->if(postcode.text[0].toString() == "6")
-                        {
+                        "WA" -> if (postcode.text[0].toString() == "6") {
 
-                        }else
-                        {
+                        } else {
                             allCheck++
                             postcode.error = "For NSW must start with 6xxx"
                         }
-                        "TAS"->if(postcode.text[0].toString() == "7")
-                        {
+                        "TAS" -> if (postcode.text[0].toString() == "7") {
 
-                        }else
-                        {
+                        } else {
                             allCheck++
                             postcode.error = "For NSW must start with 7xxx"
                         }
 
-                        "NT"->if(postcode.text[0].toString() == "0" )
-                        {
+                        "NT" -> if (postcode.text[0].toString() == "0") {
 
-                        }else
-                        {
+                        } else {
                             allCheck++
                             postcode.error = "For NSW must start with 0xxx"
                         }
                     }
-                }else
-                {
+                } else {
                     postcode.error = getString(R.string.errorPostcode)
                 }
 
@@ -239,19 +243,20 @@ class AddPost : AppCompatActivity() {
                     view = layout
                 }.show()
                 //CONCAT THE street address
-                var conStreet:String=street.text.toString()+"."+stateSpinnerData+"."+postcode.text.toString()
+                var conStreet: String =
+                    street.text.toString() + "." + stateSpinnerData + "." + postcode.text.toString()
                 //Toast.makeText(this@AddPost, conStreet, Toast.LENGTH_SHORT).show()
                 //insert into the database
                 val values = ContentValues()
                 values.put("USERID", id)
-                values.put("EMAIL",email.text.toString())
-                values.put("TITLE",title.text.toString())
-                values.put("DES",desc.text.toString())
-                values.put("LOCATION",conStreet)
-                values.put("APPLICATION",applicationSpinnerData)
-                values.put("CONTRACT",contractSpinnerData)
-                values.put("DATE",cdate.text.toString())
-                values.put("PHONE",phone.text.toString())
+                values.put("EMAIL", email.text.toString())
+                values.put("TITLE", title.text.toString())
+                values.put("DES", desc.text.toString())
+                values.put("LOCATION", conStreet)
+                values.put("APPLICATION", applicationSpinnerData)
+                values.put("CONTRACT", contractSpinnerData)
+                values.put("DATE", cdate.text.toString())
+                values.put("PHONE", phone.text.toString())
                 db.insert("POST", null, values)
 
 
@@ -278,5 +283,30 @@ class AddPost : AppCompatActivity() {
         state.setSelection(0)
         street.setText("")
 
+    }
+
+    //set date
+    private fun setDate()
+    {
+        val datePicker= Calendar.getInstance() //get time form the calender
+        val date= DatePickerDialog.OnDateSetListener{
+                view:DatePicker?,year:Int,month:Int,dayOfMonth:Int ->
+            datePicker[Calendar.YEAR]=year
+            datePicker[Calendar.MONTH]=month
+            datePicker[Calendar.DAY_OF_MONTH]=dayOfMonth
+            //crete the format for the date
+            val dateformat="dd-MM-yyyy"
+            val simpleDateFormat= SimpleDateFormat(dateformat, Locale.getDefault())
+            date=simpleDateFormat.format(datePicker.time)
+            //Toast.makeText(this,date,Toast.LENGTH_LONG).show()
+            cdate.setText(date)
+            //binding.textView.text=simpleDateFormat.format(datePicker.time)
+        }
+        DatePickerDialog(
+            this@AddPost,date,
+            datePicker[Calendar.YEAR],
+            datePicker[Calendar.MONTH],
+            datePicker[Calendar.DAY_OF_MONTH]
+        ).show()
     }
 }

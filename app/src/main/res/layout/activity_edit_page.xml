@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_background_addpost"
     tools:context=".AddPost">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -91,7 +92,6 @@
             android:layout_height="60dp"
             android:layout_marginLeft="10dp"
             android:hint="Closing Date"
-            app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -104,6 +104,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Cdate"
+                android:editable="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -127,6 +128,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phone"
+                android:maxLength="10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -257,6 +259,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:maxLength="4"
                     android:id="@+id/postcode"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -268,6 +271,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="20dp">
         <Button
+            android:backgroundTint="@color/grey"
             android:id="@+id/update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

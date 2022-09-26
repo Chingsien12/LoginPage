@@ -1,14 +1,19 @@
 package com.example.loginpage
 
+import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.widget.EditText
 import android.util.Patterns
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import java.util.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.loginpage.databinding.ActivityMainBinding
+import java.text.SimpleDateFormat
 
 
 class Register : AppCompatActivity() {
@@ -24,7 +29,9 @@ class Register : AppCompatActivity() {
     private lateinit var work: EditText
     private lateinit var address: EditText
     private lateinit var loginlink:TextView
-    private lateinit var calender:ImageView
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var date:String
+    //private lateinit var calender:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -44,7 +51,16 @@ class Register : AppCompatActivity() {
             phone = findViewById(R.id.phone)
             work = findViewById(R.id.History)
             address = findViewById(R.id.address)
-            calender=findViewById(R.id.calender)
+
+            //using binding
+            binding=ActivityMainBinding.inflate(layoutInflater)
+
+            DOB.setOnClickListener {
+
+            setDate()
+            }
+
+            //calender=findViewById(R.id.calender)
             var error: String = ""
 
             //regex check
@@ -190,5 +206,30 @@ class Register : AppCompatActivity() {
         phone.setText("")
         work.setText("")
         address.setText("")
+    }
+
+
+    private fun setDate()
+    {
+        val datePicker=Calendar.getInstance() //get time form the calender
+        val date= DatePickerDialog.OnDateSetListener{
+                view:DatePicker?,year:Int,month:Int,dayOfMonth:Int ->
+            datePicker[Calendar.YEAR]=year
+            datePicker[Calendar.MONTH]=month
+            datePicker[Calendar.DAY_OF_MONTH]=dayOfMonth
+            //crete the format for the date
+            val dateformat="dd-MM-yyyy"
+            val simpleDateFormat= SimpleDateFormat(dateformat,Locale.getDefault())
+            date=simpleDateFormat.format(datePicker.time)
+            //Toast.makeText(this,date,Toast.LENGTH_LONG).show()
+            DOB.setText(date)
+            //binding.textView.text=simpleDateFormat.format(datePicker.time)
+        }
+        DatePickerDialog(
+            this@Register,date,
+            datePicker[Calendar.YEAR],
+            datePicker[Calendar.MONTH],
+            datePicker[Calendar.DAY_OF_MONTH]
+        ).show()
     }
 }

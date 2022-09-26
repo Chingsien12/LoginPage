@@ -14,4 +14,6 @@
     <color name="grey">#808080</color>
     <color name="lightblue">#b3e5fc</color>
     <color name="purplr">#b99aff</color>
+    <color name="blackgrey">#1A182C</color>
+    <color name="actionbutton">#421999</color>
 </resources>

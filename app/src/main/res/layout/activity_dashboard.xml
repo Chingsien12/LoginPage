@@ -6,145 +6,170 @@
     android:layout_height="match_parent"
     tools:context=".Dashboard">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/anton"
-        android:text="Dashboard"
-        android:textSize="30sp"
-        android:textStyle="bold"
+    <View
+        android:id="@+id/view3"
+        android:layout_width="396dp"
+        android:layout_height="784dp"
+        android:background="@drawable/gradient_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <!-- Action name text for the add person button -->
+    <!-- Make sure that you are constraining this Text
+         to the add Person FAB button -->
 
     <TextView
-        android:id="@+id/clock"
-        android:layout_width="150sp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/clockbackground"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text=""
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.784"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/robot"
         android:text=""
-        android:fontFamily=""
-        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clock"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.02" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_width="406dp"
-        android:layout_height="451dp"
-        android:layout_marginTop="84dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
+        android:layout_width="392dp"
+        android:layout_height="512dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="387dp"
+            android:layout_height="499dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.463" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="394dp"
+        android:layout_height="85dp"
+        android:background="@color/blackgrey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clock"
-        app:layout_constraintVertical_bias="0.101" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
+        app:backgroundTint="#537895"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/ic_chevron_left_right_svgrepo_com"
+        app:tint="#FFFFFF" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_post_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/add_fab"
-        app:layout_constraintEnd_toEndOf="@+id/add_fab"
-        app:layout_constraintStart_toStartOf="@+id/add_fab"
-        app:srcCompat="@drawable/ic_baseline_post_add_24" />
+        android:layout_marginBottom="28dp"
+        android:clickable="true"
+        app:backgroundTint="#537895"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/add_fab"
+        app:layout_constraintVertical_bias="0.75"
+        app:srcCompat="@drawable/ic_baseline_post_add_24"
+        app:tint="#FFFFFF" />
 
     <TextView
         android:id="@+id/addPost"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="3dp"
         android:text="Add Post"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/add_post_fab"
-        app:layout_constraintEnd_toStartOf="@+id/add_post_fab"
-        app:layout_constraintTop_toTopOf="@+id/add_post_fab" />
+        app:layout_constraintEnd_toEndOf="@+id/add_post_fab"
+        app:layout_constraintStart_toStartOf="@+id/add_post_fab"
+        app:layout_constraintTop_toBottomOf="@+id/add_post_fab" />
+
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/view_post_fab"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginEnd="56dp"-->
+    <!--        android:clickable="true"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/add_fab"-->
+    <!--        app:layout_constraintHorizontal_bias="1.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/add_fab"-->
+    <!--        app:srcCompat="@drawable/ic_baseline_add_24"-->
+    <!--        android:tint="#FFFFFF"-->
+    <!--        />-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/view_post_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/add_post_fab"
-        app:layout_constraintEnd_toEndOf="@+id/add_post_fab"
-        app:layout_constraintStart_toStartOf="@+id/add_post_fab"
-        app:srcCompat="@drawable/ic_baseline_preview_24" />
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        app:backgroundTint="#537895"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/add_fab"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view4"
+        app:layout_constraintVertical_bias="0.433"
+        app:srcCompat="@drawable/ic_baseline_preview_24"
+        app:tint="#FFFFFF" />
 
-    <!-- Action name text for the add person button -->
-    <!-- Make sure that you are constraining this Text
-         to the add Person FAB button -->
     <TextView
         android:id="@+id/viewPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textStyle="bold"
         android:text="View post"
-        app:layout_constraintBottom_toBottomOf="@+id/view_post_fab"
-        app:layout_constraintEnd_toStartOf="@+id/view_post_fab"
-        app:layout_constraintTop_toTopOf="@+id/view_post_fab" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/restart_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/ic_baseline_refresh_24"
-        app:layout_constraintBottom_toTopOf="@+id/view_post_fab"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/view_post_fab"
-        app:layout_constraintStart_toStartOf="@+id/view_post_fab" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/view_post_fab"
+        app:layout_constraintTop_toBottomOf="@+id/view_post_fab"
+        app:layout_constraintVertical_bias="0.048" />
 
     <TextView
-        android:id="@+id/restart"
+        android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Refresh"
+        android:layout_marginBottom="36dp"
+        android:fontFamily="@font/robot"
+        android:text="scroll down for more job post"
+        android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/restart_fab"
-        app:layout_constraintEnd_toStartOf="@+id/restart_fab"
-        app:layout_constraintTop_toTopOf="@+id/restart_fab"
-        app:layout_constraintVertical_bias="0.621" />
+        app:layout_constraintBottom_toTopOf="@+id/swiperefresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

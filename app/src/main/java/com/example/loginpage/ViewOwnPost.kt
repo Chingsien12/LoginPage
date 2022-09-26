@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class ViewOwnPost : AppCompatActivity() {
 
@@ -19,26 +22,27 @@ class ViewOwnPost : AppCompatActivity() {
     private lateinit var tool:FloatingActionButton
     private lateinit var delete:FloatingActionButton
     private lateinit var edit:FloatingActionButton
-    private lateinit var refresh:FloatingActionButton
     private lateinit var textID:TextView
-    private lateinit var refreshText:TextView
     private lateinit var deleteText:TextView
     private lateinit var editText:TextView
     private var isAllFabsVisible: Boolean = false
+    private lateinit var swipe:SwipeRefreshLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_own_post)
+        //title action bar
+        supportActionBar?.title = "Your own post"
+        supportActionBar?.subtitle = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+        //set up intent
         userid = intent.getStringExtra("ID")
         //register to the ID
         tool=findViewById(R.id.tool)
         delete=findViewById(R.id.delete_fab)
         edit=findViewById(R.id.edit_fab)
-        refresh=findViewById(R.id.refresh_fab)
         textID=findViewById(R.id.ID)
-        refreshText=findViewById(R.id.refreshText)
         deleteText=findViewById(R.id.deleteText)
         editText=findViewById(R.id.editText)
-
+        swipe=findViewById(R.id.swiperefresh)
         //id.text=userid
         helper = MyDBhelper(applicationContext)
         val db = helper.readableDatabase
@@ -48,26 +52,21 @@ class ViewOwnPost : AppCompatActivity() {
         //hide all of button
         delete.visibility= View.GONE
         edit.visibility=View.GONE
-        refresh.visibility=View.GONE
 
-        refreshText.visibility=View.GONE
+
         editText.visibility=View.GONE
         deleteText.visibility=View.GONE
 
         tool.setOnClickListener {
             if (!isAllFabsVisible) {
-                refresh.show()
                 edit.show()
                 delete.show()
-                refreshText.visibility=View.VISIBLE
                 editText.visibility = View.VISIBLE
                 deleteText.visibility = View.VISIBLE
                 isAllFabsVisible = true
             } else {
-                refresh.visibility = View.GONE
                 edit.visibility = View.GONE
                 delete.visibility=View.GONE
-                refreshText.visibility=View.GONE
                 editText.visibility = View.GONE
                 deleteText.visibility = View.GONE
                 isAllFabsVisible = false
@@ -87,11 +86,6 @@ class ViewOwnPost : AppCompatActivity() {
             }
         }
 
-        refresh.setOnClickListener {
-            val mIntent = intent
-            finish()
-            startActivity(mIntent)
-        }
 
         delete.setOnClickListener {
             if(textID.text=="")
@@ -116,7 +110,10 @@ class ViewOwnPost : AppCompatActivity() {
                 //db.delete()
             }
         }
-
+    swipe.setOnRefreshListener {
+        viewPost()
+        swipe.isRefreshing=false
+    }
     }
 
     private fun viewPost() {

@@ -1,5 +1,6 @@
 package com.example.loginpage
 
+import android.app.DatePickerDialog
 import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +8,12 @@ import android.util.Patterns
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import com.example.loginpage.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.li_post.*
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class editPage : AppCompatActivity() {
     private var userid: String? = ""
@@ -26,11 +32,14 @@ class editPage : AppCompatActivity() {
     private lateinit var applicationSpinnerData: String
     private lateinit var contractSpinnerData: String
     private lateinit var stateSpinnerData: String
-
+    private lateinit var date: String
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_page)
-
+        //set up the title
+        supportActionBar?.title = "Update page"
+        supportActionBar?.subtitle = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
         //define the regex Phone
         val phonePattern = """^0[0-8]\d{8}${'$'}""".toRegex()
         //set up the ID
@@ -48,7 +57,13 @@ class editPage : AppCompatActivity() {
         //set up the intent
         userid = intent.getStringExtra("ID")
         pid = intent.getStringExtra("PID")
+        //setup binding
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
+        cdate.setOnClickListener {
+
+            setDate()
+        }
         //set up the database
         val helper = MyDBhelper(applicationContext)
         //val db = helper.writableDatabase
@@ -267,7 +282,7 @@ class editPage : AppCompatActivity() {
             }
 
             if (allCheck == 0 && error == "") {
-                val layout: View = layoutInflater.inflate(R.layout.custom_toast_form, null)
+                val layout: View = layoutInflater.inflate(R.layout.custom_toast_update, null)
                 Toast(this).apply {
                     duration = Toast.LENGTH_SHORT
                     setGravity(Gravity.CENTER, 0, 0)
@@ -296,5 +311,30 @@ class editPage : AppCompatActivity() {
             }
 
         }
+    }
+
+    //set date
+    private fun setDate()
+    {
+        val datePicker= Calendar.getInstance() //get time form the calender
+        val date= DatePickerDialog.OnDateSetListener{
+                view:DatePicker?,year:Int,month:Int,dayOfMonth:Int ->
+            datePicker[Calendar.YEAR]=year
+            datePicker[Calendar.MONTH]=month
+            datePicker[Calendar.DAY_OF_MONTH]=dayOfMonth
+            //crete the format for the date
+            val dateformat="dd-MM-yyyy"
+            val simpleDateFormat= SimpleDateFormat(dateformat, Locale.getDefault())
+            date=simpleDateFormat.format(datePicker.time)
+            //Toast.makeText(this,date,Toast.LENGTH_LONG).show()
+            cdate.setText(date)
+            //binding.textView.text=simpleDateFormat.format(datePicker.time)
+        }
+        DatePickerDialog(
+            this@editPage,date,
+            datePicker[Calendar.YEAR],
+            datePicker[Calendar.MONTH],
+            datePicker[Calendar.DAY_OF_MONTH]
+        ).show()
     }
 }
