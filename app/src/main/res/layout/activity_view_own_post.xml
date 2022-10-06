@@ -7,27 +7,41 @@
     android:background="@drawable/gradient_background"
     tools:context=".ViewOwnPost">
 
-    <View
-        android:id="@+id/view4"
-        android:layout_width="412dp"
-        android:layout_height="96dp"
-        android:background="@color/blackgrey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <View-->
+<!--        android:id="@+id/view4"-->
+<!--        android:layout_width="412dp"-->
+<!--        android:layout_height="96dp"-->
+<!--        android:background="@color/blackgrey"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
+
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/tool"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="24dp"-->
+<!--        android:clickable="true"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.498"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/view4"-->
+<!--        app:layout_constraintVertical_bias="1.0"-->
+<!--        app:srcCompat="@drawable/ic_chevron_left_right_svgrepo_com" />-->
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
-        android:layout_width="402dp"
-        android:layout_height="521dp"
+        android:layout_width="392dp"
+        android:layout_height="656dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.082">
+        app:layout_constraintVertical_bias="0.213">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Rv"
@@ -40,93 +54,76 @@
             app:layout_constraintVertical_bias="0.3" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/tool"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view4"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_chevron_left_right_svgrepo_com" />
-
     <TextView
-        android:textStyle="bold"
         android:id="@+id/ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="96dp"
+        android:layout_marginStart="32dp"
         android:text=""
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tool"
-        app:layout_constraintHorizontal_bias="0.819"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swiperefresh"
-        app:layout_constraintVertical_bias="1.0" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="96dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
         android:text="ITEM ID SELECTED"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ID"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swiperefresh"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/delete_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="@+id/view4"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tool"
-        app:layout_constraintTop_toTopOf="@+id/tool"
-        app:srcCompat="@drawable/ic_baseline_delete_24" />
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/delete_fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="68dp"-->
+<!--        android:clickable="true"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/view4"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/tool"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/tool"-->
+<!--        app:srcCompat="@drawable/ic_baseline_delete_24" />-->
 
-    <TextView
-        android:id="@+id/deleteText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete Post"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/delete_fab"
-        app:layout_constraintStart_toStartOf="@+id/delete_fab"
-        app:layout_constraintTop_toBottomOf="@+id/delete_fab" />
+<!--    <TextView-->
+<!--        android:id="@+id/deleteText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Delete Post"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/delete_fab"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/delete_fab"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/delete_fab" />-->
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/edit_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toStartOf="@+id/tool"
-        app:layout_constraintTop_toTopOf="@+id/tool"
-        app:srcCompat="@drawable/ic_baseline_edit_24" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/edit_fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="68dp"-->
+<!--        android:clickable="true"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/tool"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/tool"-->
+<!--        app:srcCompat="@drawable/ic_baseline_edit_24" />-->
 
-    <TextView
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:textColor="@color/white"
-        android:text="Edit Post"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/edit_fab"
-        app:layout_constraintStart_toStartOf="@+id/edit_fab"
-        app:layout_constraintTop_toTopOf="@+id/edit_fab" />
+<!--    <TextView-->
+<!--        android:id="@+id/editText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="56dp"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:text="Edit Post"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/edit_fab"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/edit_fab"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/edit_fab" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

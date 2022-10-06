@@ -5,11 +5,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.li_post_user.view.*
 
 
-class PostAdapterUser(context: Context, private val Posts: ArrayList<Post>) :
+class PostAdapterUser(context: Context, private val Posts: ArrayList<Post>/*,private val listener:(Post)->Unit*/) :
     RecyclerView.Adapter<PostAdapterUser.ViewHolder>() {
     //inherited form the RecycleView class
 
@@ -26,6 +27,19 @@ class PostAdapterUser(context: Context, private val Posts: ArrayList<Post>) :
         val date = itemView.Date
         val email=itemView.email
         val phone=itemView.phone
+        val check=itemView.check
+        fun bind(post:Post)
+        {
+            pid.text=post.pid.toString()
+            title.text=post.title
+            description.text=post.description
+            location.text=post.location
+            application.text=post.application
+            contract.text=post.contract
+            date.text=post.date
+            email.text=post.email
+            phone.text=post.phone
+        }
     }
 
     fun setOnclickItem(callbacks:(Post)->Unit )
@@ -47,6 +61,8 @@ class PostAdapterUser(context: Context, private val Posts: ArrayList<Post>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post: Post = Posts[position]
+        var i:Int=0
+        holder.bind(post)
         holder.pid.text = post.pid.toString()
         holder.title.text = post.title
         holder.description.text = post.description
@@ -58,7 +74,18 @@ class PostAdapterUser(context: Context, private val Posts: ArrayList<Post>) :
         holder.phone.text=post.phone
         holder.itemView.setOnClickListener {//
             onClickItem?.invoke(post)
+//            if(i==0)
+//            {
+//                holder.check.visibility=View.VISIBLE
+//                i=1
+//            }else
+//            {
+//                holder.check.visibility=View.GONE
+//                i=0
+//            }
+
         }
+
     }
 
     override fun getItemCount(): Int {

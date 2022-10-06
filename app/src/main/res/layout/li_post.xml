@@ -203,6 +203,7 @@
         android:layout_marginStart="128dp"
         android:layout_marginTop="12dp"
         android:autoLink="email"
+        android:textColorLink="@color/white"
         android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
