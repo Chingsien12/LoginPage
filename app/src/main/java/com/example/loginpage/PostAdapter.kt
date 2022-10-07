@@ -3,9 +3,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.li_post.view.*
 import kotlinx.android.synthetic.main.li_post.view.Title
+import org.w3c.dom.Text
 
 class PostAdapter(context: Context, private val Posts: ArrayList<Post>,
 //private val listener: OnItemClickListener
@@ -15,6 +17,9 @@ class PostAdapter(context: Context, private val Posts: ArrayList<Post>,
    inner class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView)//, View.OnClickListener// hold the view of the R.layout.li_post as all textView
     {
+//        val pis=itemView.findViewById<TextView>(R.id.editText)
+        //REGISTER THE ID
+
         val pid = itemView.PID
         val title = itemView.Title
         val description = itemView.Desc

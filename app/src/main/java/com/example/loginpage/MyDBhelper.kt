@@ -64,7 +64,7 @@ class MyDBhelper(context: Context):SQLiteOpenHelper(context,"CORE1",null,1) {
         val cursor=db.rawQuery(qry,null)
         val postArrayList=ArrayList<Post>()
 
-        if(cursor.count==0)
+        if(cursor.count==0)//count the row
         {
             Toast.makeText(context, "No result found!", Toast.LENGTH_SHORT).show()
         }else

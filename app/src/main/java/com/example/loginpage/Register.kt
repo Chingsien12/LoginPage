@@ -37,14 +37,19 @@ class Register : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         val helper = MyDBhelper(applicationContext)
         val db = helper.readableDatabase
-
+        //register ID
+        DOB = findViewById(R.id.DOB)
+        //DOB click
+        DOB.setOnClickListener {
+            setDate()
+        }
         //button register
         register = findViewById(R.id.Register)
         register.setOnClickListener {
             name = findViewById(R.id.edName)
             password = findViewById(R.id.edPassword)
             Cpassword = findViewById(R.id.edConPassword)
-            DOB = findViewById(R.id.DOB)
+
             language = findViewById(R.id.language)
             skill = findViewById(R.id.skill)
             email = findViewById(R.id.email)
@@ -55,10 +60,7 @@ class Register : AppCompatActivity() {
             //using binding
             binding=ActivityMainBinding.inflate(layoutInflater)
 
-            DOB.setOnClickListener {
 
-            setDate()
-            }
 
             //calender=findViewById(R.id.calender)
             var error: String = ""

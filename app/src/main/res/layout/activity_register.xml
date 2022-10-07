@@ -110,17 +110,29 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
-    <EditText
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/DOB"
-        android:hint="Date of birth"
-        android:padding="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:editable="false"
-        android:layout_gravity="center_vertical"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="355dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:hint="Date of Birth"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.041"
+        app:startIconDrawable="@drawable/ic_baseline_calendar_month_24"
+
+        android:layout_weight="1.1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/DOB"
+            android:editable="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
 
