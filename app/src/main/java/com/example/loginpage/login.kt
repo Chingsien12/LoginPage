@@ -40,7 +40,7 @@ class login : AppCompatActivity() {
 //
                 }
                 startActivity(intent)
-                Toast.makeText(applicationContext,"Found",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"lOGIN",Toast.LENGTH_SHORT).show()
             } else {
                 val layout: View = layoutInflater.inflate(R.layout.custom_toast, null)
                 Toast(this).apply {

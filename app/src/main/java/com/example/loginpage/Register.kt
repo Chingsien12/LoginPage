@@ -224,6 +224,7 @@ class Register : AppCompatActivity() {
             val simpleDateFormat= SimpleDateFormat(dateformat,Locale.getDefault())
             date=simpleDateFormat.format(datePicker.time)
             //Toast.makeText(this,date,Toast.LENGTH_LONG).show()
+            DOB.error=null
             DOB.setText(date)
             //binding.textView.text=simpleDateFormat.format(datePicker.time)
         }

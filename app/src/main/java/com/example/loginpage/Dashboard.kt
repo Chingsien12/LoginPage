@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter
 class Dashboard : AppCompatActivity() {
     private lateinit var helper: MyDBhelper
     private lateinit var rv: RecyclerView
+    private lateinit var search:FloatingActionButton
     private lateinit var mAddFab: FloatingActionButton
     private lateinit var mAddpost: FloatingActionButton
     private lateinit var mViewPost: FloatingActionButton
@@ -45,6 +46,7 @@ class Dashboard : AppCompatActivity() {
         //swipe register ID
         swipe=findViewById(R.id.swiperefresh)
         //register the FAB with their ID
+        search=findViewById(R.id.search_fab)
         mAddFab = findViewById(R.id.add_fab)
         mAddpost = findViewById(R.id.add_post_fab)
         mViewPost = findViewById(R.id.view_post_fab)
@@ -97,6 +99,12 @@ class Dashboard : AppCompatActivity() {
             viewPost()
             swipe.isRefreshing=false
         }
+
+        search.setOnClickListener {
+            val i=Intent(this,MainActivity::class.java)
+            startActivity(i)
+        }
+
     }
 
     private fun viewPost() {

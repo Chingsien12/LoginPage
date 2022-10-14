@@ -299,6 +299,7 @@ class AddPost : AppCompatActivity() {
             val simpleDateFormat= SimpleDateFormat(dateformat, Locale.getDefault())
             date=simpleDateFormat.format(datePicker.time)
             //Toast.makeText(this,date,Toast.LENGTH_LONG).show()
+            cdate.error=null
             cdate.setText(date)
             //binding.textView.text=simpleDateFormat.format(datePicker.time)
         }

@@ -1,6 +1,5 @@
 package com.example.loginpage
 
-import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -128,5 +127,73 @@ class MyDBhelper(context: Context):SQLiteOpenHelper(context,"CORE1",null,1) {
         val db=this.writableDatabase
 
         db.delete("POST","PID=$id",null)
+    }
+//get post search for the search bar
+    fun getPostsearch(context: Context,title:String):ArrayList<Post>
+    {
+        //Toast.makeText(context, "this is toast from DB $title", Toast.LENGTH_SHORT).show()
+        val qry="SELECT * from POST WHERE TITLE LIKE '%$title%'"
+        val db=this.readableDatabase
+        val cursor=db.rawQuery(qry,null)
+        val postArrayList=ArrayList<Post>()
+
+        if(cursor.count==0)
+        {
+            Toast.makeText(context, "No result found!", Toast.LENGTH_SHORT).show()
+        }else
+        {
+            while (cursor.moveToNext())
+            {
+                val eachLineHolder=Post() // object model
+                eachLineHolder.pid=cursor.getInt(0)
+                eachLineHolder.uid=cursor.getInt(1)
+                eachLineHolder.email=cursor.getString(2)
+                eachLineHolder.title=cursor.getString(3)
+                eachLineHolder.description=cursor.getString(4)
+                eachLineHolder.location=cursor.getString(5)
+                eachLineHolder.application=cursor.getString(6)
+                eachLineHolder.contract=cursor.getString(7)
+                eachLineHolder.date=cursor.getString(8)
+                eachLineHolder.phone=cursor.getString(9)
+                postArrayList.add(eachLineHolder)
+            }
+        }
+        cursor.close()
+        db.close()
+        return postArrayList
+    }
+
+    fun getPostsearchState(context: Context,title:String,state:String):ArrayList<Post>
+    {
+        //Toast.makeText(context, "this is toast from DB $title", Toast.LENGTH_SHORT).show()
+        val qry="SELECT * from POST WHERE TITLE LIKE '%$title%' AND LOCATION LIKE '%$state%'"
+        val db=this.readableDatabase
+        val cursor=db.rawQuery(qry,null)
+        val postArrayList=ArrayList<Post>()
+
+        if(cursor.count==0)
+        {
+            Toast.makeText(context, "No result found!", Toast.LENGTH_SHORT).show()
+        }else
+        {
+            while (cursor.moveToNext())
+            {
+                val eachLineHolder=Post() // object model
+                eachLineHolder.pid=cursor.getInt(0)
+                eachLineHolder.uid=cursor.getInt(1)
+                eachLineHolder.email=cursor.getString(2)
+                eachLineHolder.title=cursor.getString(3)
+                eachLineHolder.description=cursor.getString(4)
+                eachLineHolder.location=cursor.getString(5)
+                eachLineHolder.application=cursor.getString(6)
+                eachLineHolder.contract=cursor.getString(7)
+                eachLineHolder.date=cursor.getString(8)
+                eachLineHolder.phone=cursor.getString(9)
+                postArrayList.add(eachLineHolder)
+            }
+        }
+        cursor.close()
+        db.close()
+        return postArrayList
     }
 }
