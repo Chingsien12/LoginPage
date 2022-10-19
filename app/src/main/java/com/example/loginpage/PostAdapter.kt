@@ -9,7 +9,8 @@ import kotlinx.android.synthetic.main.li_post.view.*
 import kotlinx.android.synthetic.main.li_post.view.Title
 import org.w3c.dom.Text
 
-class PostAdapter(context: Context, private val Posts: ArrayList<Post>,
+class PostAdapter(
+    context: Context, private val Posts: ArrayList<Post>,
 //private val listener: OnItemClickListener
                   ) :
     RecyclerView.Adapter<PostAdapter.ViewHolder>() {

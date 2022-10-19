@@ -196,4 +196,37 @@ class MyDBhelper(context: Context):SQLiteOpenHelper(context,"CORE1",null,1) {
         db.close()
         return postArrayList
     }
+
+    fun getUser(context: Context,ID:String):ArrayList<account>
+    {
+        val qry="SELECT * from USERS WHERE USERID=$ID"
+        val db=this.readableDatabase
+        val cursor=db.rawQuery(qry,null)
+        val postArrayList=ArrayList<account>()
+
+        if(cursor.count==0)
+        {
+            Toast.makeText(context, "No result found!", Toast.LENGTH_SHORT).show()
+        }else
+        {
+            while (cursor.moveToNext())
+            {
+                val eachLineHolder=account() // object model
+                eachLineHolder.userid=cursor.getInt(0)
+                eachLineHolder.uname=cursor.getString(1)
+                eachLineHolder.dob=cursor.getString(3)
+                eachLineHolder.skill=cursor.getString(4)
+                eachLineHolder.language=cursor.getString(5)
+                eachLineHolder.email=cursor.getString(6)
+                eachLineHolder.phone=cursor.getString(7)
+                eachLineHolder.address=cursor.getString(8)
+                eachLineHolder.history=cursor.getString(9)
+                postArrayList.add(eachLineHolder)
+            }
+        }
+        cursor.close()
+        db.close()
+        return postArrayList
+    }
+
 }

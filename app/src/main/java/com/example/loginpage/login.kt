@@ -1,5 +1,6 @@
 package com.example.loginpage
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -38,6 +39,11 @@ class login : AppCompatActivity() {
                 val intent = Intent(this, Dashboard::class.java).apply {
                     putExtra("ID", result.getString(0))
 //
+                }
+                val sharePref=this.getSharedPreferences("myid", Context.MODE_PRIVATE)
+                with (sharePref.edit()){
+                    putString("ID",result.getString(0))
+                    apply()
                 }
                 startActivity(intent)
                 Toast.makeText(applicationContext,"lOGIN",Toast.LENGTH_SHORT).show()

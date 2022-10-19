@@ -21,6 +21,7 @@
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/drawable/rounded_border_layout.xml" value="0.2455" />
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/drawable/spinner.xml" value="0.2455" />
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/drawable/spinner_style.xml" value="0.3155" />
+        <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/activity_account.xml" value="0.3078125" />
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/activity_add_post.xml" value="0.42962962962962964" />
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/activity_add_post2.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/activity_dashboard.xml" value="0.33" />
@@ -33,9 +34,11 @@
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/custom_toast_form.xml" value="0.5456410256410257" />
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/custom_toast_post.xml" value="0.5446153846153846" />
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/custom_toast_update.xml" value="0.553125" />
+        <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/fragment_dashboard_fragment.xml" value="0.3264367816091954" />
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/li_owner_post.xml" value="0.5333333333333333" />
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/li_post.xml" value="0.5351170568561873" />
         <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/layout/li_post_user.xml" value="0.553125" />
+        <entry key="..\:/Users/lysie/AndroidStudioProjects/LoginPage/app/src/main/res/menu/account_option.xml" value="0.3067708333333333" />
         <entry key="..\:/Users/lysie/StudioProjects/LoginPage2/app/src/main/res/drawable/clockbackground.xml" value="0.2855" />
         <entry key="..\:/Users/lysie/StudioProjects/LoginPage2/app/src/main/res/drawable/dotted_line.xml" value="0.187" />
         <entry key="..\:/Users/lysie/StudioProjects/LoginPage2/app/src/main/res/drawable/error.xml" value="0.1215" />

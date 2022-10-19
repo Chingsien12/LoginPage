@@ -2,6 +2,8 @@ package com.example.loginpage
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -105,6 +107,10 @@ class Dashboard : AppCompatActivity() {
             startActivity(i)
         }
 
+
+
+
+
     }
 
     private fun viewPost() {
@@ -116,4 +122,22 @@ class Dashboard : AppCompatActivity() {
         rv.adapter = adapter
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.account_option, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.options -> gotointent()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun gotointent()
+    {
+        var i=Intent(this,Account::class.java)
+        startActivity(i)
+    }
 }
