@@ -1,11 +1,13 @@
 package com.example.loginpage
 
+import android.accounts.Account
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -124,20 +126,22 @@ class Dashboard : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.account_option, menu)
-
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.options -> gotointent()
+            R.id.options ->{
+                val i=Intent(this,UserAccount::class.java);
+            startActivity(i)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun gotointent()
-    {
-        var i=Intent(this,Account::class.java)
-        startActivity(i)
-    }
+//    private fun gotointent()
+//    {
+//        var i=Intent(this,Account::class.java)
+//        startActivity(i)
+//    }
 }

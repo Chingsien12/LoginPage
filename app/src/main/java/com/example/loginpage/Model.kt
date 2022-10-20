@@ -1,5 +1,5 @@
 package com.example.loginpage
-
+//obj
 class Post {
 
     var pid: Int = 0

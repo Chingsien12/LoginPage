@@ -133,6 +133,7 @@ class MyDBhelper(context: Context):SQLiteOpenHelper(context,"CORE1",null,1) {
     {
         //Toast.makeText(context, "this is toast from DB $title", Toast.LENGTH_SHORT).show()
         val qry="SELECT * from POST WHERE TITLE LIKE '%$title%'"
+//        val qry="SELECT * from POST WHERE TITLE='$title'"
         val db=this.readableDatabase
         val cursor=db.rawQuery(qry,null)
         val postArrayList=ArrayList<Post>()
@@ -197,13 +198,12 @@ class MyDBhelper(context: Context):SQLiteOpenHelper(context,"CORE1",null,1) {
         return postArrayList
     }
 
-    fun getUser(context: Context,ID:String):ArrayList<account>
+    fun getUser(context: Context,ID:String):account
     {
         val qry="SELECT * from USERS WHERE USERID=$ID"
         val db=this.readableDatabase
         val cursor=db.rawQuery(qry,null)
-        val postArrayList=ArrayList<account>()
-
+        val eachLineHolder=account() // object model
         if(cursor.count==0)
         {
             Toast.makeText(context, "No result found!", Toast.LENGTH_SHORT).show()
@@ -211,7 +211,7 @@ class MyDBhelper(context: Context):SQLiteOpenHelper(context,"CORE1",null,1) {
         {
             while (cursor.moveToNext())
             {
-                val eachLineHolder=account() // object model
+
                 eachLineHolder.userid=cursor.getInt(0)
                 eachLineHolder.uname=cursor.getString(1)
                 eachLineHolder.dob=cursor.getString(3)
@@ -221,12 +221,25 @@ class MyDBhelper(context: Context):SQLiteOpenHelper(context,"CORE1",null,1) {
                 eachLineHolder.phone=cursor.getString(7)
                 eachLineHolder.address=cursor.getString(8)
                 eachLineHolder.history=cursor.getString(9)
-                postArrayList.add(eachLineHolder)
             }
         }
         cursor.close()
         db.close()
-        return postArrayList
+        return eachLineHolder
     }
 
+    fun getUserNumPost(context: Context,ID:String):Int
+    {
+        val qry="SELECT * from POST WHERE USERID=$ID"
+        val db=this.readableDatabase
+        val cursor=db.rawQuery(qry,null)
+        val eachLineHolder=account() // object model
+        if(cursor.count==0)
+        {
+            return cursor.count
+        }
+        cursor.close()
+        db.close()
+        return cursor.count
+    }
 }

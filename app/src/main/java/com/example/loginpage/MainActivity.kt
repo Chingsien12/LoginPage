@@ -1,7 +1,10 @@
 package com.example.loginpage
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
@@ -95,5 +98,20 @@ class MainActivity : AppCompatActivity() {
     private fun reset() {
         searchView.setText("")
         state.setSelection(0)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.account_option, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.options ->{
+                val i= Intent(this,UserAccount::class.java);
+                startActivity(i)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

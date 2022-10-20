@@ -34,6 +34,9 @@ class AddPost : AppCompatActivity() {
     private lateinit var date: String
     private lateinit var binding: ActivityMainBinding
     private var id: String? = ""
+    private lateinit var str: Array<String>
+    private lateinit var strcurrent: Array<String>
+    private lateinit var currentDate: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
@@ -55,7 +58,8 @@ class AddPost : AppCompatActivity() {
         id = intent.getStringExtra("ID")
         //Toast.makeText(this@AddPost, id.toString(), Toast.LENGTH_SHORT).show()
         //set on click listener on reset
-
+        //set up system date
+        currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
         reset.setOnClickListener {
             reset()
         }
@@ -145,6 +149,13 @@ class AddPost : AppCompatActivity() {
             if (cdate.text.toString().isEmpty()) {
                 allCheck++
                 cdate.error = getString(R.string.errordate)
+            } else {
+                if (currentDate.compareTo(cdate.text.toString()) > 0) {
+                    allCheck++
+                    cdate.error = "You must not enter the past date!"
+                } else {
+                    cdate.error = null
+                }
             }
             //checking the phone
             if (phone.text.toString().isEmpty()) {
@@ -183,47 +194,47 @@ class AddPost : AppCompatActivity() {
                 if (postcode.text.toString().isNotEmpty()) {
                     when (stateSpinnerData) {
                         "VIC" -> if (postcode.text[0].toString() == "3" || postcode.text[0].toString() == "8") {
-
+                            postcode.error = null
                         } else {
                             allCheck++
                             postcode.error = "For VIC must start with 3xxx or 8xxx"
                         }
 
                         "NSW" -> if (postcode.text[0].toString() == "1" || postcode.text[0].toString() == "2") {
-
+                            postcode.error = null
                         } else {
                             allCheck++
                             postcode.error = "For NSW must start with 1xxx or 2xxx"
                         }
 
                         "QLD" -> if (postcode.text[0].toString() == "4" || postcode.text[0].toString() == "9") {
-
+                            postcode.error = null
                         } else {
                             allCheck++
                             postcode.error = "For QLD must start with 4xxx or 9xxx"
                         }
 
                         "SA" -> if (postcode.text[0].toString() == "5") {
-
+                            postcode.error = null
                         } else {
                             allCheck++
                             postcode.error = "For SA must start with 5xxx"
                         }
                         "WA" -> if (postcode.text[0].toString() == "6") {
-
+                            postcode.error = null
                         } else {
                             allCheck++
                             postcode.error = "For NSW must start with 6xxx"
                         }
                         "TAS" -> if (postcode.text[0].toString() == "7") {
-
+                            postcode.error = null
                         } else {
                             allCheck++
                             postcode.error = "For NSW must start with 7xxx"
                         }
 
                         "NT" -> if (postcode.text[0].toString() == "0") {
-
+                            postcode.error = null
                         } else {
                             allCheck++
                             postcode.error = "For NSW must start with 0xxx"
@@ -236,7 +247,7 @@ class AddPost : AppCompatActivity() {
             }
 
             if (allCheck == 0 && error == "") {
-                val layout: View = layoutInflater.inflate(R.layout.custom_toast_form, null)
+                val layout: View = layoutInflater.inflate(R.layout.custom_toast_post, null)
                 Toast(this).apply {
                     duration = Toast.LENGTH_SHORT
                     setGravity(Gravity.CENTER, 0, 0)
@@ -286,25 +297,25 @@ class AddPost : AppCompatActivity() {
     }
 
     //set date
-    private fun setDate()
-    {
-        val datePicker= Calendar.getInstance() //get time form the calender
-        val date= DatePickerDialog.OnDateSetListener{
-                view:DatePicker?,year:Int,month:Int,dayOfMonth:Int ->
-            datePicker[Calendar.YEAR]=year
-            datePicker[Calendar.MONTH]=month
-            datePicker[Calendar.DAY_OF_MONTH]=dayOfMonth
-            //crete the format for the date
-            val dateformat="dd-MM-yyyy"
-            val simpleDateFormat= SimpleDateFormat(dateformat, Locale.getDefault())
-            date=simpleDateFormat.format(datePicker.time)
-            //Toast.makeText(this,date,Toast.LENGTH_LONG).show()
-            cdate.error=null
-            cdate.setText(date)
-            //binding.textView.text=simpleDateFormat.format(datePicker.time)
-        }
+    private fun setDate() {
+        val datePicker = Calendar.getInstance() //get time form the calender
+        val date =
+            DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                datePicker[Calendar.YEAR] = year
+                datePicker[Calendar.MONTH] = month
+                datePicker[Calendar.DAY_OF_MONTH] = dayOfMonth
+                //crete the format for the date
+                val dateformat = "dd-MM-yyyy"
+                val simpleDateFormat = SimpleDateFormat(dateformat, Locale.getDefault())
+                date = simpleDateFormat.format(datePicker.time)
+                //Toast.makeText(this,date,Toast.LENGTH_LONG).show()
+
+                cdate.error = null
+                cdate.setText(date)
+                //binding.textView.text=simpleDateFormat.format(datePicker.time)
+            }
         DatePickerDialog(
-            this@AddPost,date,
+            this@AddPost, date,
             datePicker[Calendar.YEAR],
             datePicker[Calendar.MONTH],
             datePicker[Calendar.DAY_OF_MONTH]

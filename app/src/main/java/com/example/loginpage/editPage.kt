@@ -216,7 +216,7 @@ class editPage : AppCompatActivity() {
                 {
                     when (stateSpinnerData) {
                         "VIC" -> if (postcode.text[0].toString() == "3" || postcode.text[0].toString() == "8") {
-
+                            postcode.error=null
                         } else {
                             allCheck++
                             postcode.error = "For VIC must start with 3xxx or 8xxx"
@@ -224,7 +224,7 @@ class editPage : AppCompatActivity() {
 
                         "NSW" -> if(postcode.text[0].toString() == "1" || postcode.text[0].toString() == "2")
                         {
-
+                            postcode.error=null
                         }else
                         {
                             allCheck++
@@ -233,7 +233,7 @@ class editPage : AppCompatActivity() {
 
                         "QLD" -> if(postcode.text[0].toString() == "4" || postcode.text[0].toString() == "9")
                         {
-
+                            postcode.error=null
                         }else
                         {
                             allCheck++
@@ -242,7 +242,7 @@ class editPage : AppCompatActivity() {
 
                         "SA"->if(postcode.text[0].toString() == "5")
                         {
-
+                            postcode.error=null
                         }else
                         {
                             allCheck++
@@ -250,7 +250,7 @@ class editPage : AppCompatActivity() {
                         }
                         "WA" ->if(postcode.text[0].toString() == "6")
                         {
-
+                            postcode.error=null
                         }else
                         {
                             allCheck++
@@ -258,7 +258,7 @@ class editPage : AppCompatActivity() {
                         }
                         "TAS"->if(postcode.text[0].toString() == "7")
                         {
-
+                            postcode.error=null
                         }else
                         {
                             allCheck++
@@ -267,7 +267,7 @@ class editPage : AppCompatActivity() {
 
                         "NT"->if(postcode.text[0].toString() == "0" )
                         {
-
+                            postcode.error=null
                         }else
                         {
                             allCheck++

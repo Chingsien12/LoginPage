@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.util.Patterns
 import android.view.Gravity
@@ -14,6 +15,8 @@ import java.util.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.loginpage.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class Register : AppCompatActivity() {
@@ -31,12 +34,17 @@ class Register : AppCompatActivity() {
     private lateinit var loginlink:TextView
     private lateinit var binding: ActivityMainBinding
     private lateinit var date:String
+    private lateinit var str:Array<String>
+    private lateinit var strcurrent:Array<String>
+    private lateinit var currentDate:String
     //private lateinit var calender:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         val helper = MyDBhelper(applicationContext)
         val db = helper.readableDatabase
+        //setup the date
+        currentDate=LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
         //register ID
         DOB = findViewById(R.id.DOB)
         //DOB click
@@ -146,7 +154,19 @@ class Register : AppCompatActivity() {
                 DOB.error=getString(R.string.errorDOB)
             } else {
                 DOB.error=null
+                str= DOB.text.toString().split("-").toTypedArray()
+                strcurrent=currentDate.split("-").toTypedArray()
+                //Toast.makeText(this, currentDate, Toast.LENGTH_SHORT).show()
+                if((strcurrent[2].toInt()-str[2].toInt())<16)
+                {
+                    DOB.error="You must older than 15 year old."
+                }else
+                {
+                    DOB.error=null
+                }
             }
+
+
             if (!regexPhonenumber.matches(input = phone.text.toString())) {
                 error += "Phone number must not be empty and follow this format 01234567890\n"
                 phone.error=getString(R.string.errorPhonePattern)
@@ -224,6 +244,7 @@ class Register : AppCompatActivity() {
             val simpleDateFormat= SimpleDateFormat(dateformat,Locale.getDefault())
             date=simpleDateFormat.format(datePicker.time)
             //Toast.makeText(this,date,Toast.LENGTH_LONG).show()
+
             DOB.error=null
             DOB.setText(date)
             //binding.textView.text=simpleDateFormat.format(datePicker.time)

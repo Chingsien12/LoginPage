@@ -2,7 +2,6 @@ package com.example.loginpage
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -10,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class login : AppCompatActivity() {
     private lateinit var name: EditText
@@ -31,7 +31,7 @@ class login : AppCompatActivity() {
             //password.setBackgroundResource(0)
             //create the array list to check the if the database contail those data or not
             val Userlist =
-                listOf<String>(name.text.toString(), password.text.toString()).toTypedArray()
+                listOf<String>(name.text.toString().trim(), password.text.toString()).toTypedArray()
             val result = db.rawQuery("SELECT * FROM USERS WHERE EMAIL = ? AND PWD = ?", Userlist)
 
 
@@ -65,5 +65,9 @@ class login : AppCompatActivity() {
             startActivity(intent)
             //Toast.makeText(this,"OK",Toast.LENGTH_SHORT).show()
         }
+
+    }
+    override fun onBackPressed() {
+        //do nothing
     }
 }
