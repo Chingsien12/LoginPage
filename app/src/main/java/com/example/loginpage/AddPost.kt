@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.*
 import com.example.loginpage.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -150,12 +151,27 @@ class AddPost : AppCompatActivity() {
                 allCheck++
                 cdate.error = getString(R.string.errordate)
             } else {
-                if (currentDate.compareTo(cdate.text.toString()) > 0) {
-                    allCheck++
-                    cdate.error = "You must not enter the past date!"
-                } else {
-                    cdate.error = null
+                val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+                val inputDate: LocalDate = LocalDate.parse(cdate.text, formatter)
+                val systemDate: LocalDate = LocalDate.parse(currentDate, formatter)
+                when {
+                    inputDate.isAfter(systemDate) -> {
+                        cdate.error = null
+                    }
+                    inputDate.isBefore(systemDate) -> {
+                        allCheck++
+                        cdate.error = "You must not enter the past date!"
+                    }
+
                 }
+//                if (currentDate.compareTo(cdate.text.toString()) > 0) {
+//                    allCheck++
+//                    cdate.error = "You must not enter the past date!"
+//                } else {
+//                    cdate.error = null
+//                }
+
+
             }
             //checking the phone
             if (phone.text.toString().isEmpty()) {
