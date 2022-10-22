@@ -34,6 +34,7 @@ class editPage : AppCompatActivity() {
     private lateinit var stateSpinnerData: String
     private lateinit var date: String
     private lateinit var binding: ActivityMainBinding
+    private lateinit var currentDate: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_page)
@@ -57,6 +58,8 @@ class editPage : AppCompatActivity() {
         //set up the intent
         userid = intent.getStringExtra("ID")
         pid = intent.getStringExtra("PID")
+        //set up the current date
+        currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
         //setup binding
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -177,6 +180,16 @@ class editPage : AppCompatActivity() {
             if (cdate.text.toString().isEmpty()) {
                 allCheck++
                 cdate.error = getString(R.string.errordate)
+            }else
+            {
+                if(currentDate.compareTo(cdate.text.toString())>0)
+                {
+                    allCheck++
+                    cdate.error = "You must not enter the past date!"
+                }else
+                {
+                    cdate.error = null
+                }
             }
             //checking the phone
             if (phone.text.toString().isEmpty()) {

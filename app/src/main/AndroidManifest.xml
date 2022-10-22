@@ -16,10 +16,7 @@
         <activity
             android:name=".UserAccount"
             android:exported="false" />
-        <activity
-            android:name=".Account"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".editPage"
             android:exported="false"
